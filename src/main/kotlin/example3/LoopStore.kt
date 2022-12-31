@@ -10,7 +10,7 @@ interface LoopStore: Store<Intent, State, Nothing> {
         data class UpdateActualXAndY(val newX: Int, val newY: Int, val state:State) : Intent()
         data class UpdateN(val newN: Int,val state:State): Intent()
         data class UpdateM(val newM: Int,val state:State): Intent()
-        data class UpdateNAndM(val newN: Int, val newM: Int,val state:State): Intent()
+        data class UpdateXAndYAndNAndM(val newX: Int, val newY: Int, val newN: Int, val newM: Int): Intent()
         data class Start(val newN:Int, val newM:Int,val state:State) : Intent()
     }
 
