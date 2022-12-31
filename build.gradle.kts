@@ -16,9 +16,8 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     implementation("com.arkivanov.mvikotlin:mvikotlin:3.0.2")
-    implementation("com.arkivanov.mvikotlin:mvikotlin-extensions-reaktive:3.0.2")
+    implementation("com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines:3.0.2")
     implementation("com.arkivanov.mvikotlin:mvikotlin-timetravel-proto-internal:3.0.2")
-    implementation("com.badoo.reaktive:reaktive:1.2.2")
     implementation("com.arkivanov.mvikotlin:mvikotlin-timetravel:3.0.2")
     implementation("com.arkivanov.mvikotlin:mvikotlin-logging:3.0.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")

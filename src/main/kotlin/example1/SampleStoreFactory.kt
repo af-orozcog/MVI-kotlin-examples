@@ -4,7 +4,7 @@ import com.arkivanov.mvikotlin.core.store.Reducer
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.JvmSerializable
-import com.arkivanov.mvikotlin.extensions.reaktive.ReaktiveExecutor
+import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
 import example1.SampleStore.State
 import example1.SampleStore.Intent
 import com.arkivanov.mvikotlin.timetravel.proto.internal.data.timetravelfunctionlist.TimeTravelFunctionList
@@ -41,7 +41,7 @@ internal class SampleStoreFactory(
         data class UpdateState(val answer: String, val courseName: String, val studentId: String) : Msg()
     }
 
-    private inner class ExecutorImpl : ReaktiveExecutor<Intent, Nothing, State, Msg, Nothing>() {
+    private inner class ExecutorImpl : CoroutineExecutor<Intent, Nothing, State, Msg, Nothing>() {
         override fun executeIntent(intent: Intent, getState: () -> State) {
             when (intent) {
                 is Intent.UpdateCourseName -> calculateAnswer(intent.courseName, intent.studentId)
@@ -82,15 +82,14 @@ internal class SampleStoreFactory(
         }
 
         private fun calculateAnswer(newCourseName: String, newStudentId: String) {
-                try {
-                    val strategyId = findStrategy(newCourseName)
-                    val evaluations = getDegrees(newCourseName,newStudentId)
-                    var mean = evalStrategy[strategyId!!](evaluations)
-                    dispatch(Msg.UpdateState(mean.toString(),newCourseName,newStudentId))
-                }catch (e:Exception){
-                    dispatch(Msg.UpdateState("error",newCourseName,newStudentId))
-                }
-
+            try {
+                val strategyId = findStrategy(newCourseName)
+                val evaluations = getDegrees(newCourseName,newStudentId)
+                var mean = evalStrategy[strategyId!!](evaluations)
+                dispatch(Msg.UpdateState(mean.toString(),newCourseName,newStudentId))
+            }catch (e:Exception){
+                dispatch(Msg.UpdateState("error",newCourseName,newStudentId))
+            }
         }
     }
 
