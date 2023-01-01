@@ -75,7 +75,6 @@ class LoopStoreFactory(val storeFactory: StoreFactory, private val counterStore:
 
         private fun updateXAndYAndNAndM(newX: Int,newY: Int,newN: Int, newM: Int){
             dispatch(Msg.UpdateNAndM(newN,newM))
-            println("-----------------------what happened????----------------------------")
             nextIteration?.let { it(newX, newY) }
         }
 
